@@ -1,4 +1,5 @@
-﻿using RestApiExample.Json;
+﻿using RestApiExample.Authorization;
+using RestApiExample.Json;
 using System.Collections.Generic;
 using System.Net.Http;
 
@@ -6,11 +7,11 @@ namespace RestApiExample.Helpers
 {
     public class Request
     {
-        private readonly string _apiUnderTestUrl = new ConfigReader().GetConfig().GetSection("ApiUrlUnderTest").Value;
 
-        private string _endpoint;
-        private string _payload;
-        private string _token;
+        public string HostUrl { get; set; } = new ConfigReader().GetConfig().GetSection("ApiUrlUnderTest").Value;
+
+        private string payload;
+        private string token;
 
         public HttpMethod Method { get; set; }
 
@@ -18,20 +19,33 @@ namespace RestApiExample.Helpers
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_payload))
+                if (string.IsNullOrWhiteSpace(payload))
                 {
-                    return _payload;
+                    return payload;
                 }
 
-                var jsonPayloadProcessor = new JsonPayloadProcessor();
-                return jsonPayloadProcessor.ProcessJson(_payload);
+                JsonPayloadProcessor jsonPayloadProcessor = new JsonPayloadProcessor();
+                return jsonPayloadProcessor.ProcessJson(payload);
             }
-            set => _payload = value;
+            set => payload = value;
         }
 
-        public string Endpoint { get => _apiUnderTestUrl + _endpoint; set => _endpoint = value; }
+        public string Endpoint { get; set; }
 
         public int ExpectedStatusCode { get; set; }
+
+        public UserTypes UserType { get; set; }
+
+        public string Token
+        {
+
+            get
+            {
+                token = new TokenProvider().GetTokenBasedOnUserType(UserType);
+                return token;
+            }
+            set => token = value;
+        }
 
         public Dictionary<string, string> FormData { get; set; } = new Dictionary<string, string>();
     }

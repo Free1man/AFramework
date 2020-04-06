@@ -124,11 +124,13 @@ this.ScenarioInitialize(scenarioInfo);
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                             "Method",
                             "Endpoint",
-                            "ExpectedStatusCode"});
+                            "ExpectedStatusCode",
+                            "UserType"});
                 table1.AddRow(new string[] {
                             "GET",
                             "users/2",
-                            "200"});
+                            "200",
+                            "WhiskUser"});
 #line 5
  testRunner.Given("I send a request", ((string)(null)), table1, "Given ");
 #line hidden

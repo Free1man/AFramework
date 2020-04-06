@@ -22,7 +22,7 @@ namespace RestApiExample.Helpers
             var message = new HttpRequestMessage
             {
                 Method = request.Method,
-                RequestUri = new Uri(request.Endpoint),
+                RequestUri = new Uri(request.HostUrl + request.Endpoint),
             };
 
             //add from data
@@ -32,6 +32,13 @@ namespace RestApiExample.Helpers
                   .Accept
                   .Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
                 message.Content = new FormUrlEncodedContent(request.FormData);
+            }
+
+            //add token
+            if (request.Token != null)
+            {
+                client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Bearer", request.Token);
             }
 
             //add payload 
