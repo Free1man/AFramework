@@ -6,11 +6,11 @@ namespace RestApiExample.Helpers
 {
     public class Request
     {
-        private readonly string APIUnderTestUrl = new ConfigReader().GetConfig().GetSection("ApiUrlUnderTest").Value;
+        private readonly string _apiUnderTestUrl = new ConfigReader().GetConfig().GetSection("ApiUrlUnderTest").Value;
 
-        private string endpoint;
-        private string payload;
-        private string token;
+        private string _endpoint;
+        private string _payload;
+        private string _token;
 
         public HttpMethod Method { get; set; }
 
@@ -18,18 +18,18 @@ namespace RestApiExample.Helpers
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(payload))
+                if (string.IsNullOrWhiteSpace(_payload))
                 {
-                    return payload;
+                    return _payload;
                 }
 
-                JsonPayloadProcessor jsonPayloadProcessor = new JsonPayloadProcessor();
-                return jsonPayloadProcessor.ProcessJson(payload);
+                var jsonPayloadProcessor = new JsonPayloadProcessor();
+                return jsonPayloadProcessor.ProcessJson(_payload);
             }
-            set => payload = value;
+            set => _payload = value;
         }
 
-        public string Endpoint { get => APIUnderTestUrl + endpoint; set => endpoint = value; }
+        public string Endpoint { get => _apiUnderTestUrl + _endpoint; set => _endpoint = value; }
 
         public int ExpectedStatusCode { get; set; }
 

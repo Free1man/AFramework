@@ -10,3 +10,4 @@ Scenario: Verify user
 		| Verify first name      | $.data.first_name | Janet             |
 		| Verify ad company name | $.ad.company      | StatusCode Weekly |
 
+		 

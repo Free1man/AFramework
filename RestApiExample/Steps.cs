@@ -13,12 +13,12 @@ namespace RestApiExample
     [Binding]
     public sealed class Steps
     {
-        private readonly ScenarioContext context;
-        private HttpResponseMessage response;
+        private readonly ScenarioContext _context;
+        private HttpResponseMessage _response;
 
         public Steps(ScenarioContext injectedContext)
         {
-            context = injectedContext;
+            _context = injectedContext;
             Service.Instance.ValueRetrievers.Register(new MethodValueRetriever());
         }
 
@@ -26,22 +26,22 @@ namespace RestApiExample
         public void GivenISendARequest(Table table)
         {
             var request = table.CreateInstance<Request>();
-            if (context.ContainsKey("valuesToReplaceInJsonForNextRequest"))
+            if (_context.ContainsKey("valuesToReplaceInJsonForNextRequest"))
             {
-                Dictionary<string, string> valuesToReplaceInJsonForNextRequest = (Dictionary<string, string>)context["valuesToReplaceInJsonForNextRequest"];
+                var valuesToReplaceInJsonForNextRequest = (Dictionary<string, string>)_context["valuesToReplaceInJsonForNextRequest"];
                 foreach (var valueToUpdate in valuesToReplaceInJsonForNextRequest)
                 {
                     request.Payload = JsonEditor.UpdateJson(request.Payload, valueToUpdate.Key, valueToUpdate.Value);
                 }
-                context.Remove("valuesToReplaceInJsonForNextRequest");
+                _context.Remove("valuesToReplaceInJsonForNextRequest");
             }
-            response = new HttpClientWrapper().Response(request);
+            _response = new HttpClientWrapper().Response(request);
         }
 
         [StepDefinition(@"response should contain")]
         public void ThenJsonResponseShouldContain(Table table)
         {
-            var json = response.Content.ReadAsStringAsync().Result;
+            var json = _response.Content.ReadAsStringAsync().Result;
             var jToken = JToken.Parse(json);
 
             foreach (var row in table.Rows)
@@ -53,31 +53,10 @@ namespace RestApiExample
             }
         }
 
-        [StepDefinition(@"response should contain, using pattern (.*)")]
-        public void ThenJsonResponseShouldContain(string pattern, Table table)
-        {
-            var json = response.Content.ReadAsStringAsync().Result;
-            var jsonObject = JToken.Parse(json);
-
-            foreach (var row in table.Rows)
-            {
-                //# rework if approach will be accepted
-                var jsonPath = pattern;
-                string s = jsonPath;
-                int start = s.IndexOf("<<");
-                int end = s.IndexOf(">>", start);
-                string result = s.Substring(start, end - start + 2);
-                jsonPath = s.Replace(result, row[1]);
-                var actualValue = jsonObject.SelectToken(jsonPath).ToString();
-                var expectedValue = row[2];
-                Assert.AreEqual(expectedValue, actualValue);
-            }
-        }
-
         [StepDefinition(@"I update default values to populate the next request")]
-        public void GivenIUpdateNextValuesInJsnoForNextReqest(Table table)
+        public void GivenIUpdateNextValuesInJsonForNextRequest(Table table)
         {
-            context.Add("valuesToReplaceInJsonForNextRequest", table.ToDictionary());
+            _context.Add("valuesToReplaceInJsonForNextRequest", table.ToDictionary());
         }
     }
 }
