@@ -13,10 +13,7 @@ namespace RestApiExample.Helpers
             var handler = new HttpClientHandler();
             handler.ClientCertificateOptions = ClientCertificateOption.Manual;
             handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) =>
-                {
-                    return true;
-                };
+                (httpRequestMessage, cert, cetChain, policyErrors) => true;
 
             using var client = new HttpClient(handler);
             var message = new HttpRequestMessage

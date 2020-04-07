@@ -10,8 +10,8 @@ namespace RestApiExample.Helpers
 
         public string HostUrl { get; set; } = new ConfigReader().GetConfig().GetSection("ApiUrlUnderTest").Value;
 
-        private string payload;
-        private string token;
+        private string _payload;
+        private string _token;
 
         public HttpMethod Method { get; set; }
 
@@ -19,15 +19,15 @@ namespace RestApiExample.Helpers
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(payload))
+                if (string.IsNullOrWhiteSpace(_payload))
                 {
-                    return payload;
+                    return _payload;
                 }
 
                 JsonPayloadProcessor jsonPayloadProcessor = new JsonPayloadProcessor();
-                return jsonPayloadProcessor.ProcessJson(payload);
+                return jsonPayloadProcessor.ProcessJson(_payload);
             }
-            set => payload = value;
+            set => _payload = value;
         }
 
         public string Endpoint { get; set; }
@@ -41,10 +41,14 @@ namespace RestApiExample.Helpers
 
             get
             {
-                token = new TokenProvider().GetTokenBasedOnUserType(UserType);
-                return token;
+                if (_token != null)
+                {
+                    return _token;
+                }
+                _token = new TokenProvider().GetTokenBasedOnUserType(UserType);
+                return _token;
             }
-            set => token = value;
+            set => _token = value;
         }
 
         public Dictionary<string, string> FormData { get; set; } = new Dictionary<string, string>();

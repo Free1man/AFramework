@@ -8,9 +8,9 @@ namespace RestApiExample.Authorization
         public Request CreateRequestBasedOnUserType(UserTypes userType)
         {
             var request = new Request();
-            if (userType == UserTypes.WhiskUser)
+            if (userType == UserTypes.Anonymous)
             {
-                request.Payload = "AuthorizationWhiskUser.json";
+                request.Payload = "{\r\n  \"clientId\": \"WCqJWnpNatcf3LUCxZmq94pR30sj2OOdBbMoGO8NGrMgUMk6Ogl4EMvLqcykNuGf\"\r\n}";
             }
             else
             {

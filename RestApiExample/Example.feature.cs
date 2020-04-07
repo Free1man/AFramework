@@ -92,14 +92,14 @@ namespace RestApiExample
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Verify user")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Create an empty list, delete it, then verify it deleted for sure")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Example")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mytag")]
-        public virtual void VerifyUser()
+        public virtual void CreateAnEmptyListDeleteItThenVerifyItDeletedForSure()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify user", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create an empty list, delete it, then verify it deleted for sure", null, new string[] {
                         "mytag"});
 #line 4
 this.ScenarioInitialize(scenarioInfo);
@@ -123,31 +123,77 @@ this.ScenarioInitialize(scenarioInfo);
                 this.ScenarioStart();
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                             "Method",
+                            "Payload",
                             "Endpoint",
                             "ExpectedStatusCode",
                             "UserType"});
                 table1.AddRow(new string[] {
-                            "GET",
-                            "users/2",
+                            "POST",
+                            "{\"name\":\"Test\"}",
+                            "lists",
                             "200",
-                            "WhiskUser"});
+                            "Anonymous"});
 #line 5
  testRunner.Given("I send a request", ((string)(null)), table1, "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Method",
+                            "Endpoint",
+                            "ExpectedStatusCode",
+                            "UserType"});
+                table2.AddRow(new string[] {
+                            "GET",
+                            "lists",
+                            "200",
+                            "Anonymous"});
+#line 8
+ testRunner.When("I send a request", ((string)(null)), table2, "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "Assert description",
                             "JsonPath",
-                            "Value"});
-                table2.AddRow(new string[] {
-                            "Verify first name",
-                            "$.data.first_name",
-                            "Janet"});
-                table2.AddRow(new string[] {
-                            "Verify ad company name",
-                            "$.ad.company",
-                            "StatusCode Weekly"});
-#line 8
- testRunner.And("response should contain", ((string)(null)), table2, "And ");
+                            "ExpectedValue"});
+                table3.AddRow(new string[] {
+                            "Verify that list was created with no items",
+                            "$.[?(@.name==\'Test\')].itemsCount",
+                            "0"});
+#line 11
+ testRunner.Then("response should contain", ((string)(null)), table3, "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                            "refrenceName",
+                            "jsonPath"});
+                table4.AddRow(new string[] {
+                            "listId",
+                            "$..id"});
+#line 14
+ testRunner.And("I save value from json for future reuse", ((string)(null)), table4, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Method",
+                            "Endpoint",
+                            "ExpectedStatusCode",
+                            "UserType"});
+                table5.AddRow(new string[] {
+                            "DELETE",
+                            "{{listId}}",
+                            "200",
+                            "Anonymous"});
+#line 17
+ testRunner.And("I send a request", ((string)(null)), table5, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Method",
+                            "Endpoint",
+                            "ExpectedStatusCode",
+                            "UserType"});
+                table6.AddRow(new string[] {
+                            "GET",
+                            "{{listId}}",
+                            "400",
+                            "Anonymous"});
+#line 20
+ testRunner.And("I send a request", ((string)(null)), table6, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
