@@ -1,4 +1,4 @@
-﻿namespace RestApiExample.Authorization
+﻿namespace RestApi.Test.Authorization
 {
     public enum UserTypes
     {

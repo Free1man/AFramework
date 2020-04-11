@@ -1,9 +1,9 @@
-﻿using RestApiExample.Authorization;
-using RestApiExample.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
+using RestApi.Test.Authorization;
+using RestApi.Test.Json;
 
-namespace RestApiExample.Helpers
+namespace RestApi.Test.Helpers
 {
     public class Request
     {

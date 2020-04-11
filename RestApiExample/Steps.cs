@@ -1,15 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json.Linq;
-using RestApiExample.Helpers;
-using RestApiExample.Helpers.SpecflowHelpers;
-using RestApiExample.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
-using RestApiExample.Authorization;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json.Linq;
+using RestApi.Test.Authorization;
+using RestApi.Test.Helpers;
+using RestApi.Test.Helpers.SpecflowHelpers;
+using RestApi.Test.Json;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
-namespace RestApiExample
+namespace RestApi.Test
 {
     [Binding]
     public sealed class Steps

@@ -1,8 +1,8 @@
-﻿using RestApiExample.Helpers;
-using RestApiExample.Json;
-using System.Net.Http;
+﻿using System.Net.Http;
+using RestApi.Test.Helpers;
+using RestApi.Test.Json;
 
-namespace RestApiExample.Authorization
+namespace RestApi.Test.Authorization
 {
     public class TokenProvider
     {

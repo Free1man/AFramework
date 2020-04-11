@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace RestApiExample.Helpers
+namespace RestApi.Test.Helpers
 {
     public class ConfigReader
     {

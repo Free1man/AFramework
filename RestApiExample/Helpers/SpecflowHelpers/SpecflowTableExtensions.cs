@@ -1,10 +1,9 @@
-﻿using RestApiExample.Helpers.SpecflowHelpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using TechTalk.SpecFlow;
 
-namespace RestApiExample.Helpers.SpecflowHelpers
+namespace RestApi.Test.Helpers.SpecflowHelpers
 {
     static class SpecflowTableExtensions
     {

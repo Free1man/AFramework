@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using TechTalk.SpecFlow.Assist;
 
-namespace RestApiExample.Helpers.SpecflowHelpers
+namespace RestApi.Test.Helpers.SpecflowHelpers
 {
     public class MethodValueRetriever : IValueRetriever
     {

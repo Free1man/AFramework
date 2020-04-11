@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace RestApiExample.Json
+namespace RestApi.Test.Json
 {
     public static class JsonEditor
     {

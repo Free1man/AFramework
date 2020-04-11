@@ -1,7 +1,7 @@
 ﻿using System;
-using RestApiExample.Helpers;
+using RestApi.Test.Helpers;
 
-namespace RestApiExample.Authorization
+namespace RestApi.Test.Authorization
 {
     public class AuthorizationRequestFactory
     {
