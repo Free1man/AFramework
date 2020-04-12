@@ -20,7 +20,7 @@ namespace RestApi.Test
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
-    public partial class ExampleFeature
+    public partial class UserFlowTest_CreateDeleteListFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -48,7 +48,8 @@ namespace RestApi.Test
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Example", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "User flow test -> Create/delete list", "\t\tThis Feature file provides an example for user flow Rest Api test.\r\n\t\tFocus to " +
+                    "verify that valid user can create and delete list.", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -63,9 +64,9 @@ namespace RestApi.Test
         public virtual void TestInitialize()
         {
             if (((testRunner.FeatureContext != null) 
-                        && (testRunner.FeatureContext.FeatureInfo.Title != "Example")))
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "User flow test -> Create/delete list")))
             {
-                global::RestApi.Test.ExampleFeature.FeatureSetup(null);
+                global::RestApi.Test.UserFlowTest_CreateDeleteListFeature.FeatureSetup(null);
             }
         }
         
@@ -93,15 +94,12 @@ namespace RestApi.Test
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Create an empty list, delete it, then verify it deleted for sure")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Example")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mytag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "User flow test -> Create/delete list")]
         public virtual void CreateAnEmptyListDeleteItThenVerifyItDeletedForSure()
         {
-            string[] tagsOfScenario = new string[] {
-                    "mytag"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create an empty list, delete it, then verify it deleted for sure", null, new string[] {
-                        "mytag"});
-#line 4
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create an empty list, delete it, then verify it deleted for sure", null, ((string[])(null)));
+#line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -133,7 +131,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "lists",
                             "200",
                             "Anonymous"});
-#line 5
+#line 6
  testRunner.Given("I send a request", ((string)(null)), table1, "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -146,7 +144,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "lists",
                             "200",
                             "Anonymous"});
-#line 8
+#line 9
  testRunner.When("I send a request", ((string)(null)), table2, "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -157,7 +155,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Verify that list was created with no items",
                             "$.[?(@.name==\'Test\')].itemsCount",
                             "0"});
-#line 11
+#line 12
  testRunner.Then("response should contain", ((string)(null)), table3, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -166,7 +164,7 @@ this.ScenarioInitialize(scenarioInfo);
                 table4.AddRow(new string[] {
                             "listId",
                             "$..id"});
-#line 14
+#line 15
  testRunner.And("I save value from json for future reuse", ((string)(null)), table4, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -179,7 +177,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "{{listId}}",
                             "200",
                             "Anonymous"});
-#line 17
+#line 18
  testRunner.And("I send a request", ((string)(null)), table5, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -192,7 +190,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "{{listId}}",
                             "400",
                             "Anonymous"});
-#line 20
+#line 21
  testRunner.And("I send a request", ((string)(null)), table6, "And ");
 #line hidden
             }

@@ -1,8 +1,7 @@
-﻿Feature:User flow test: Create/delete list
+﻿Feature:User flow test -> Create/delete list
 		This Feature file provides an example for user flow Rest Api test.
 		Focus to verify that valid user can create and delete list.
 	
-
 Scenario: Create an empty list, delete it, then verify it deleted for sure
 	Given I send a request
 		| Method | Payload         | Endpoint | ExpectedStatusCode | UserType  |
