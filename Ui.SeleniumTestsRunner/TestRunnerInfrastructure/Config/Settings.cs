@@ -76,7 +76,7 @@ namespace Ui.SeleniumTestsRunner.TestRunnerInfrastructure.Config
             {
                 if (string.IsNullOrWhiteSpace(_url))
                 {
-                    _url = _appConfigReader.ReadStringSettingFromAppConfig("DefaultUrl", "https://dev.whisk.com/");
+                    _url = _appConfigReader.ReadStringSettingFromAppConfig("DefaultUrl");
                 }
                 return _url;
             }

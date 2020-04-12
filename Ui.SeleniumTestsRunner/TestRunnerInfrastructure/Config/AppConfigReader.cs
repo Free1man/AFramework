@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 using Ui.SeleniumTestsRunner.TestRunnerInfrastructure.Logger;
 
 namespace Ui.SeleniumTestsRunner.TestRunnerInfrastructure.Config
@@ -10,15 +11,18 @@ namespace Ui.SeleniumTestsRunner.TestRunnerInfrastructure.Config
     internal class AppConfigReader : IAppConfigReader
     {
         private readonly ILogger _logger;
+        IConfiguration _configReader;
 
         public AppConfigReader(ILogger logger = null)
         {
             _logger = logger ?? new CustomLogger();
+            var configurationBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
+            _configReader = configurationBuilder.Build();
         }
         public Dictionary<string, string> ReadSectionSettingFromAppConfig(string sectionName)
         {
             var section =
-                ConfigurationManager.GetSection(sectionName) as NameValueCollection;
+                _configReader.GetSection(sectionName) as NameValueCollection;
             if (section == null)
             {
                 _logger.Log($"Misconfiguration: The {sectionName} section is missing in app.config");
@@ -32,7 +36,7 @@ namespace Ui.SeleniumTestsRunner.TestRunnerInfrastructure.Config
             TimeSpan setting;
             try
             {
-                setting = TimeSpan.FromSeconds(Convert.ToDouble(ConfigurationManager.AppSettings[settingName]));
+                setting = TimeSpan.FromSeconds(Convert.ToDouble(_configReader.GetSection(settingName).Value));
                 if (setting == TimeSpan.Zero)
                 {
                     throw new FormatException();
@@ -51,7 +55,7 @@ namespace Ui.SeleniumTestsRunner.TestRunnerInfrastructure.Config
 
         public bool ReadBoolSettingFromAppConfig(string settingName, bool defaultValue = false)
         {
-            var rawSetting = ConfigurationManager.AppSettings[settingName];
+            var rawSetting = _configReader.GetSection(settingName).Value;
             bool setting;
             if (string.IsNullOrWhiteSpace(rawSetting))
             {
@@ -80,7 +84,7 @@ namespace Ui.SeleniumTestsRunner.TestRunnerInfrastructure.Config
 
         public string ReadStringSettingFromAppConfig(string settingName, string defaultValue = null)
         {
-            var setting = ConfigurationManager.AppSettings[settingName];
+            var setting = _configReader.GetSection(settingName).Value;
             if (defaultValue == null && string.IsNullOrWhiteSpace(setting))
             {
                 throw new ConfigurationErrorsException($"The {settingName} setting in app.config must be set.");

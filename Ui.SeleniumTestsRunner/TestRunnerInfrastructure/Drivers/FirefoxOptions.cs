@@ -12,7 +12,7 @@ namespace Ui.SeleniumTestsRunner.TestRunnerInfrastructure.Drivers
         {
             var profile = new FirefoxProfile();
             var options = new OpenQA.Selenium.Firefox.FirefoxOptions();
-            options.SetPreference(FirefoxDriver.ProfileCapabilityName, profile.ToBase64String());
+            //options.SetPreference(FirefoxDriver.ProfileCapabilityName, profile.ToBase64String());
             return options;
         }
 
