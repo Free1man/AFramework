@@ -1,7 +1,5 @@
 ﻿Feature:
 	Using the TradeMe Sandbox web site write automation code which does the following:
-	Return how many named brands of used car are available in the TradeMe UsedCars
-	category.
 	Check that the brand ‘Kia’ exists and return the current number of Kia cars listed.
 	Check that the brand ‘Hispano Suiza’ does not exist.
 	
