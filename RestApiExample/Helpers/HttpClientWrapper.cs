@@ -34,8 +34,8 @@ namespace RestApi.Test.Helpers
             //add token
             if (request.Token != null)
             {
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", request.Token);
+                client.DefaultRequestHeaders.Add("Authorization", request.Token);
+
             }
 
             //add payload 
@@ -43,15 +43,15 @@ namespace RestApi.Test.Helpers
             {
                 message.Content = new StringContent(request.Payload, Encoding.UTF8, "application/json");
             }
-            var responce = client.SendAsync(message).Result;
+            var response = client.SendAsync(message).Result;
 
-            if ((int)responce.StatusCode == request.ExpectedStatusCode || request.ExpectedStatusCode == 0)
+            if ((int)response.StatusCode == request.ExpectedStatusCode || request.ExpectedStatusCode == 0)
             {
                 //for easy debug
-                var json = responce.Content.ReadAsStringAsync().Result;
-                return responce;
+                var json = response.Content.ReadAsStringAsync().Result;
+                return response;
             }
-            throw new Exception($"Expected code:{request.ExpectedStatusCode}, but was {(int)responce.StatusCode}");
+            throw new Exception($"Expected code:{request.ExpectedStatusCode}, but was {(int)response.StatusCode}");
         }
     }
 }

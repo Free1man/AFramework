@@ -3,9 +3,6 @@
     public enum UserTypes
     {
         Unauthorized,
-        Anonymous,
-        WhiskUser,
-        GoogleUser,
-        FacebookUser
+        Authorized
     }
 }

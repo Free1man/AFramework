@@ -11,15 +11,11 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
-    <None Remove="Json\BreadItem.json" />
     <None Remove="specflow.json" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Json\BreadItem.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="specflow.json">

@@ -12,11 +12,9 @@ namespace RestApi.Test.Authorization
             {
                 return null;
             }
-            var request = new AuthorizationRequestFactory().CreateRequestBasedOnUserType(userType);
-            request.HostUrl = new ConfigReader().GetConfig().GetSection("AuthorizationUrl").Value;
-            request.Method = new HttpMethod("POST");
-            var responseJson = new HttpClientWrapper().Response(request).Content.ReadAsStringAsync().Result;
-            var token = JsonEditor.GetValueFromJson(responseJson, "$.token.access_token");
+
+            var token =
+                "OAuth oauth_consumer_key=7EB25C1C55ACC8BEAB8747598075045D, oauth_token=0637202506CF03FF1E34015B74E54B98, oauth_signature_method=PLAINTEXT, oauth_signature=16010BB5026C557453542DC42166FD11%26BB8DD8518DB9FDBEA8FC956A90505826";
             return token;
         }
     }

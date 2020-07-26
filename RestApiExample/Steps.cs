@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
@@ -44,18 +45,6 @@ namespace RestApi.Test
                 request.Token = oldToken;
             }
             _issuedTokens.TryAdd(request.UserType, request.Token);
-
-            //TODO: need to be revisited
-            if (request.Endpoint.Contains("{{"))
-            {
-                var endpoint = request.Endpoint;
-                int start = endpoint.IndexOf("{{");
-                int end = endpoint.IndexOf("}}", start);
-                string result = endpoint.Substring(start + 2, end - start - 2);
-                _context.TryGetValue(result, out string newValue);
-                endpoint = endpoint.Replace("{{", "").Replace("}}","");
-                request.Endpoint = endpoint.Replace(result, newValue);
-            }
             _response = new HttpClientWrapper().Response(request);
         }
 
@@ -68,28 +57,62 @@ namespace RestApi.Test
             foreach (var row in table.Rows)
             {
                 var jsonPath = row[1];
-                var actualValue = jToken.SelectToken(jsonPath).ToString();
+                string actualValue;
+                try
+                {
+                    actualValue = jToken.SelectToken(jsonPath).ToString();
+                }
+                catch (NullReferenceException)
+                {
+                    actualValue = "0";
+                }
                 var expectedValue = row[2];
                 Assert.AreEqual(expectedValue, actualValue, "Assert failed: " + row[0]);
             }
         }
 
-        [StepDefinition(@"I update default values to populate the next request")]
-        public void GivenIUpdateNextValuesInJsonForNextRequest(Table table)
-        {
-            _context.Add("valuesToReplaceInJsonForNextRequest", table.ToDictionary());
-        }
-
-        [Then(@"I save value from json for future reuse")]
-        public void ThenISaveValueFromJsonForFutureReuse(Table table)
+        [StepDefinition(@"response should contain node")]
+        public void ThenResponseShouldContainNode(Table table)
         {
             var json = _response.Content.ReadAsStringAsync().Result;
             var jToken = JToken.Parse(json);
 
             foreach (var row in table.Rows)
             {
-                var actualValue = jToken.SelectToken(row[1]).ToString();
-                _context.Add(row[0], actualValue);
+                var jsonPath = row[1];
+                string actualValue = null;
+                try
+                {
+                    actualValue = jToken.SelectToken(jsonPath).ToString();
+                }
+                catch (NullReferenceException)
+                {
+                    //do nothing in this case, assert will handle the result
+                }
+                Assert.IsNotNull(actualValue, "Assert failed: " + jsonPath + " node is missing");
+            }
+        }
+
+
+        [StepDefinition(@"response should not contain node")]
+        public void ThenResponseShouldNotContainNode(Table table)
+        {
+            var json = _response.Content.ReadAsStringAsync().Result;
+            var jToken = JToken.Parse(json);
+
+            foreach (var row in table.Rows)
+            {
+                var jsonPath = row[1];
+                string actualValue = null;
+                try
+                {
+                    actualValue = jToken.SelectToken(jsonPath).ToString();
+                }
+                catch (NullReferenceException)
+                {
+                    //do nothing in this case, assert will handle the result
+                }
+                Assert.IsNull(actualValue, "Assert failed: " + jsonPath + " node should not exists");
             }
         }
     }

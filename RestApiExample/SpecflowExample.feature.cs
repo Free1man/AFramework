@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Ui.Test.Specflow
+namespace RestApi.Test
 {
     using TechTalk.SpecFlow;
     using System;
@@ -20,7 +20,7 @@ namespace Ui.Test.Specflow
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
-    public partial class VerifyThatValidUserCanCreateAListFeature
+    public partial class Feature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -29,7 +29,7 @@ namespace Ui.Test.Specflow
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "WhiskExample.feature"
+#line 1 "SpecflowExample.feature"
 #line hidden
         
         public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
@@ -48,7 +48,11 @@ namespace Ui.Test.Specflow
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Verify that valid user can create a list", "\t\t and add some items to it.", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "", @"	Using the TradeMe Sandbox web site write automation code which does the following:
+	Return how many named brands of used car are available in the TradeMe UsedCars
+	category.
+	Check that the brand ‘Kia’ exists and return the current number of Kia cars listed.
+	Check that the brand ‘Hispano Suiza’ does not exist.", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -63,9 +67,9 @@ namespace Ui.Test.Specflow
         public virtual void TestInitialize()
         {
             if (((testRunner.FeatureContext != null) 
-                        && (testRunner.FeatureContext.FeatureInfo.Title != "Verify that valid user can create a list")))
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "")))
             {
-                global::Ui.Test.Specflow.VerifyThatValidUserCanCreateAListFeature.FeatureSetup(null);
+                global::RestApi.Test.Feature.FeatureSetup(null);
             }
         }
         
@@ -91,26 +95,14 @@ namespace Ui.Test.Specflow
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
-        {
-#line 4
-#line hidden
-#line 7
- testRunner.Given("I login as galperin.job@gmail.com with password Test1357900", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 8
- testRunner.And("I delete all lists except default", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-        }
-        
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Create list with one item")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Verify that valid user can create a list")]
-        public virtual void CreateListWithOneItem()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("TradeMe used cars test")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "")]
+        public virtual void TradeMeUsedCarsTest()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create list with one item", null, ((string[])(null)));
-#line 10
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TradeMe used cars test", null, ((string[])(null)));
+#line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -130,72 +122,47 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 4
-this.FeatureBackground();
-#line hidden
-#line 11
- testRunner.When("I create list with next name Test123", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                            "itemName"});
+                            "Method",
+                            "Endpoint",
+                            "ExpectedStatusCode",
+                            "UserType"});
                 table1.AddRow(new string[] {
-                            "Milk"});
-#line 12
- testRunner.And("I add next items to exiting Test123 list", ((string)(null)), table1, "And ");
-#line hidden
-#line 15
- testRunner.Then("there is 1 item(s) in the list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Create list with few items")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Verify that valid user can create a list")]
-        public virtual void CreateListWithFewItems()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create list with few items", null, ((string[])(null)));
-#line 18
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 4
-this.FeatureBackground();
-#line hidden
-#line 19
- testRunner.When("I create list with next name Test123", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                            "GET",
+                            "Categories/UsedCars.json?with_counts=true",
+                            "200",
+                            "Authorized"});
+#line 10
+ testRunner.Given("I send a request", ((string)(null)), table1, "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                            "itemName"});
+                            "Assert description",
+                            "JsonPath"});
                 table2.AddRow(new string[] {
-                            "Milk"});
-                table2.AddRow(new string[] {
-                            "Bread"});
-                table2.AddRow(new string[] {
-                            "Egg"});
-#line 20
- testRunner.And("I add next items to exiting Test123 list", ((string)(null)), table2, "And ");
+                            "Check that the brand ‘Kia’ exists",
+                            "$.Subcategories[?(@.Name==\'Kia\')]"});
+#line 13
+ testRunner.Then("response should contain node", ((string)(null)), table2, "Then ");
 #line hidden
-#line 25
- testRunner.Then("there is 3 item(s) in the list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Assert description",
+                            "JsonPath",
+                            "ExpectedValue"});
+                table3.AddRow(new string[] {
+                            "Verify current number of \'Kia\' cars listed",
+                            "$.Subcategories[?(@.Name==\'Kia\')].Count",
+                            "0"});
+#line 16
+ testRunner.And("response should contain", ((string)(null)), table3, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Assert description",
+                            "JsonPath"});
+                table4.AddRow(new string[] {
+                            "Check that the brand ‘Hispano Suiza’ does not exist.",
+                            "$.Subcategories[?(@.Name==\'Hispano Suiza\')]"});
+#line 19
+ testRunner.And("response should not contain node", ((string)(null)), table4, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
